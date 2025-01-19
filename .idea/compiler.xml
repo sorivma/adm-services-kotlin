@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="grpc-movie-contract" target="21" />
+      <module name="grpc-movie-contract.main" target="21" />
+      <module name="grpc-movie-contract.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

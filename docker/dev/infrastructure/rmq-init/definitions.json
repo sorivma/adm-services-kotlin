@@ -1,0 +1,53 @@
+{
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "movies_exchange",
+      "type": "topic",
+      "durable": true,
+      "internal": false,
+      "auto_delete": false
+    }
+  ],
+  "queues": [
+    {
+      "name": "movies_post_queue",
+      "durable": true,
+      "auto_delete": false
+    },
+    {
+      "name": "movies_update_queue",
+      "durable": true,
+      "auto_delete": false
+    },
+    {
+      "name": "movies_delete_queue",
+      "durable": false,
+      "auto_delete": false
+    }
+  ],
+  "bindings": [
+    {
+      "source": "movies_exchange",
+      "destination": "movies_post_queue",
+      "destination_type": "queue",
+      "routing_key": "movies.post"
+    },
+    {
+      "source": "movies_exchange",
+      "destination": "movies_update_queue",
+      "destination_type": "queue",
+      "routing_key": "movies.update"
+    },
+    {
+      "source": "movies_exchange",
+      "destination": "movies_delete_queue",
+      "destination_type": "queue",
+      "routing_key": "movies.delete"
+    }
+  ]
+}
