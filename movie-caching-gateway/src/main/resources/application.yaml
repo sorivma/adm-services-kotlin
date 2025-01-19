@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: movie-caching-gateway
+  rabbitmq:
+    host: ${RMQ_HOST:localhost}
+    port: ${RMQ_PORT:5672}
+    username: ${RMQ_USERNAME:sorivma}
+    password: ${RMQ_PASSWORD:sorivma}
+    virtual-host: ${RMQ_VHOST:/}
+  cache:
+    type: redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+grpc:
+  client:
+    host: ${GRPC_SERVER_HOST:localhost}
+    port: ${GRPC_SERVER_PORT:9090}
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    springframework: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
