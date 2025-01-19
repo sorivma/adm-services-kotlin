@@ -4,9 +4,27 @@
       "name": "/"
     }
   ],
+  "users": [
+    {
+      "name": "sorivma",
+      "password_hash": "h4ScatGhnBovvJMIjQkTnDley1jQEP6NCaLZUmBhL1tpouSc",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "sorivma",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
   "exchanges": [
     {
       "name": "movies_exchange",
+      "vhost": "/",
       "type": "topic",
       "durable": true,
       "internal": false,
@@ -16,35 +34,50 @@
   "queues": [
     {
       "name": "movies_post_queue",
+      "vhost": "/",
       "durable": true,
-      "auto_delete": false
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
     },
     {
       "name": "movies_update_queue",
+      "vhost": "/",
       "durable": true,
-      "auto_delete": false
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
     },
     {
       "name": "movies_delete_queue",
-      "durable": false,
-      "auto_delete": false
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
     }
   ],
   "bindings": [
     {
       "source": "movies_exchange",
+      "vhost": "/",
       "destination": "movies_post_queue",
       "destination_type": "queue",
       "routing_key": "movies.post"
     },
     {
       "source": "movies_exchange",
+      "vhost": "/",
       "destination": "movies_update_queue",
       "destination_type": "queue",
       "routing_key": "movies.update"
     },
     {
       "source": "movies_exchange",
+      "vhost": "/",
       "destination": "movies_delete_queue",
       "destination_type": "queue",
       "routing_key": "movies.delete"

@@ -1,8 +1,28 @@
 package configuration
 
-object Config {
-    val grpcPort: Int = System.getenv("GRPC_SERVER_PORT").toIntOrNull() ?: 9080
-    val dbUrl: String = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/movies_db"
-    val dbUser: String = System.getenv("DB_USER") ?: "postgres"
-    val dbPassword: String = System.getenv("DB_PASSWORD") ?: "postgres"
+import io.grpc.Server
+import io.grpc.ServerBuilder
+import service.crud.impl.MovieServiceImpl
+import service.grpc.GrpcMovieServiceImpl
+
+object GrpcConfig {
+    private const val GRPC_PORT: Int = 9191
+
+    fun init() {
+        val server: Server = ServerBuilder.forPort(GRPC_PORT)
+            .addService(GrpcMovieServiceImpl(MovieServiceImpl()))
+            .build()
+
+        println("Starting gRPC server on port $GRPC_PORT")
+        server.start()
+        println("Server started on port $GRPC_PORT")
+
+
+        Runtime.getRuntime().addShutdownHook(Thread {
+            println("Shutting down gRPC server...")
+            server.shutdown()
+        })
+
+        server.awaitTermination()
+    }
 }

@@ -2,9 +2,12 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="grpc-movie-contract" target="21" />
-      <module name="grpc-movie-contract.main" target="21" />
-      <module name="grpc-movie-contract.test" target="21" />
+      <module name="domain-service" target="21" />
+      <module name="domain-service.main" target="21" />
+      <module name="domain-service.test" target="21" />
+      <module name="movie-domain-service" target="21" />
+      <module name="movie-domain-service.main" target="21" />
+      <module name="movie-domain-service.test" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

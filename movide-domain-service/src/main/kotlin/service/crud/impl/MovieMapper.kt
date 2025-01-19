@@ -3,7 +3,7 @@ package service.crud.impl
 import com.example.movie.Movie
 import org.jetbrains.exposed.sql.ResultRow
 
-object MoveMapper {
+object MovieMapper {
     fun ResultRow.toMovie(): Movie =
         Movie.newBuilder()
             .setId(
